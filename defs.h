@@ -16,6 +16,11 @@ struct buf*     bread(uint, uint);
 void            brelse(struct buf*);
 void            bwrite(struct buf*);
 
+//ticketlock.c
+void            initTicketLock(struct ticketlock*, char*);
+void            acquireTicketLock(struct ticketlock*);
+void            releaseTicketLock(struct ticketlock*);
+
 // console.c
 void            consoleinit(void);
 void            cprintf(char*, ...);
