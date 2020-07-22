@@ -181,7 +181,7 @@ struct trapframe {
   ushort ss;
   ushort padding6;
 };
-static inline int add (int *var, int value)
+static inline int fetch_and_add (int *var, int value)
 {
   asm volatile("lock; xaddl %0, %1"
     : "+r" (value), "+m" (*var)
