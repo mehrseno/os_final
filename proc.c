@@ -544,3 +544,19 @@ void ticketlockSleep(void *chan)
   p->chan = 0;
   release(&ptable.lock);
 }
+
+void ticketlockInit(void)
+{
+  initTicketLock(&lock, "ticket");
+}
+
+void ticketlockTest(void)
+{
+  acquireTicketLock(&lock);
+  for(int i = 0 ; i < 100000000; i++){
+    //create delay
+    cprintf(" ");
+  }
+  cprintf("P%d in CS ", myproc()->pid);
+  releaseTicketLock(&lock);
+} 
