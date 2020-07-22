@@ -28,7 +28,6 @@ OBJS = \
 	vectors.o\
 	vm.o\
 	ticketlock.o\
-	ticketlockTest\
 
 
 
@@ -185,6 +184,7 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
+	_ticketlockTest\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

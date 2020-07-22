@@ -554,7 +554,7 @@ void ticketlockInit(void)
   initTicketLock(&lock, "ticket");
 }
 
-void ticketlockTest(void)
+int ticketlockTest(void)
 {
   acquireTicketLock(&lock);
   for(int i = 0 ; i < 1000; i++){

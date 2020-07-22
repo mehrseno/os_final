@@ -16,7 +16,7 @@ void initTicketLock(struct ticketlock *lk, char *name)
 
 void acquireTicketLock(struct ticketlock *lk)
 {
-     int my_turn = add(&lk->next, 1);
+     int my_turn = fetch_and_add(&lk->next, 1);
      while (lk->turn != my_turn)
          ticketlockSleep(lk);
         // Record info about lock acquisition for debugging.
@@ -25,6 +25,6 @@ void acquireTicketLock(struct ticketlock *lk)
 
 void releaseTicketLock(struct ticketlock *lk)
 {
-    add(&lk->turn, 1);
+    fetch_and_add(&lk->turn, 1);
     wakeup(lk);
 } 
