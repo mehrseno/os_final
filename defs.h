@@ -129,7 +129,7 @@ void            wakeup(void*);
 void            yield(void);
 void            ticketlockInit(void);
 int             ticketlockTest(void);
-void            ticketlockSleep();
+void            ticketlockSleep(void *chan);
 
 
 // swtch.S

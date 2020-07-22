@@ -101,3 +101,20 @@ sys_ticketlockTest(void)
 {
   return ticketlockTest();
 } 
+
+
+int sys_rwinit(void)
+{
+  initRW();
+  return 0;
+}
+int sys_rwtest(void)
+{
+  int n;
+  if (argint(0, &n) < 0)
+    return -1;
+  if (n == 0)
+    return reading();
+  else
+    return writing();
+}
