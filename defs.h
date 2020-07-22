@@ -130,6 +130,9 @@ void            yield(void);
 void            ticketlockInit(void);
 int             ticketlockTest(void);
 void            ticketlockSleep(void *chan);
+int             writing(void);
+int             reading(void);
+void            initRW(void);
 
 
 // swtch.S

@@ -10,6 +10,9 @@
 
 struct ticketlock lock;
 int counter = 0;
+struct ticketlock mutex, wl;
+int numberOfReader = 0;
+int RWcounter = 0;
 
 struct {
   struct spinlock lock;
@@ -567,4 +570,36 @@ int ticketlockTest(void)
   cprintf("Counter :%d\n", counter);
   releaseTicketLock(&lock);
   return counter;
+} 
+
+void initRW()
+{
+  initTicketLock(&mutex, "mutex");
+  initTicketLock(&wl, "writerlock");
+}
+
+int reading()
+{
+  int returnValue = 0;
+  acquireTicketLock(&mutex);
+  if (numberOfReader == 0)
+    acquireTicketLock(&wl);
+  numberOfReader += 1;
+  releaseTicketLock(&mutex);
+  //read data
+  returnValue = RWcounter;
+  acquireTicketLock(&mutex);
+  numberOfReader -= 1;
+  if (numberOfReader == 0)
+    releaseTicketLock(&wl);
+  releaseTicketLock(&mutex);
+  return returnValue;
+}
+
+int writing()
+{
+  acquireTicketLock(&wl);
+  RWcounter += 1;
+  releaseTicketLock(&wl);
+  return 0;
 } 
